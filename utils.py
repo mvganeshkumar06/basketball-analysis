@@ -6,9 +6,10 @@ from scipy.optimize import curve_fit
 import os
 import sys
 sys.path.append(os.path.join(os.getcwd(), '/usr/local/python'))
-import pyopenpose as op
-from config import shooting_result
 tf.disable_v2_behavior()
+
+from config import shooting_result
+from openpose import pyopenpose as op
 
 
 def tensorflow_init():

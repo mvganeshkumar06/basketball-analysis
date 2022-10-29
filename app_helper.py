@@ -1,11 +1,12 @@
 import cv2
 import numpy as np
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import os
 from config import shooting_result
 import matplotlib.pyplot as plt
 from utils import detect_shot, detect_image, tensorflow_init, openpose_init
 from statistics import mean
+tf.disable_v2_behavior()
 
 
 def getVideoStream(video_path):
