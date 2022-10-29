@@ -1,12 +1,13 @@
 import cv2
 import numpy as np
 import tensorflow.compat.v1 as tf
-import os
-from config import shooting_result
-import sys
-from sys import platform
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+import os
+import sys
+sys.path.append(os.path.join(os.getcwd(), '/usr/local/python'))
+import pyopenpose as op
+from config import shooting_result
 tf.disable_v2_behavior()
 
 
@@ -31,22 +32,10 @@ def tensorflow_init():
 
 
 def openpose_init():
-    try:
-        if platform == "win32":
-            sys.path.append(os.path.dirname(os.getcwd()))
-            import OpenPose.Release.pyopenpose as op
-        else:
-            path = os.path.join(os.getcwd(), '/usr/local/python')
-            print(path)
-            sys.path.append(path)
-            import pyopenpose as op
-    except ImportError as e:
-        print("Something went wrong when importing OpenPose")
-        raise e
 
     # Custom Params (refer to include/openpose/flags.hpp for more parameters)
     params = dict()
-    params["model_folder"] = "./OpenPose/models"
+    params["model_folder"] = "./openpose/models"
 
     # Starting OpenPose
     opWrapper = op.WrapperPython()
@@ -363,41 +352,3 @@ def detect_image(img, response):
                 })
 
     return img
-
-
-# def detect_API(response, img):
-#     height, width = img.shape[:2]
-#     detection_graph, image_tensor, boxes, scores, classes, num_detections = tensorflow_init()
-
-#     with tf.Session(graph=detection_graph) as sess:
-#         img_expanded = np.expand_dims(img, axis=0)
-#         (boxes, scores, classes, num_detections) = sess.run(
-#             [boxes, scores, classes, num_detections],
-#             feed_dict={image_tensor: img_expanded})
-
-#         for i, box in enumerate(boxes[0]):
-#             if (scores[0][i] > 0.5):
-#                 ymin = int((box[0] * height))
-#                 xmin = int((box[1] * width))
-#                 ymax = int((box[2] * height))
-#                 xmax = int((box[3] * width))
-#                 xCoor = int(np.mean([xmin, xmax]))
-#                 yCoor = int(np.mean([ymin, ymax]))
-#                 if(classes[0][i] == 1):  # basketball
-#                     response.append({
-#                         'class': 'Basketball',
-#                         'detection_detail': {
-#                             'confidence': float(scores[0][i]),
-#                             'center_coordinate': {'x': xCoor, 'y': yCoor},
-#                             'box_boundary': {'x_min': xmin, 'x_max': xmax, 'y_min': ymin, 'y_max': ymax}
-#                         }
-#                     })
-#                 if(classes[0][i] == 2):  # Rim
-#                     response.append({
-#                         'class': 'Hoop',
-#                         'detection_detail': {
-#                             'confidence': float(scores[0][i]),
-#                             'center_coordinate': {'x': xCoor, 'y': yCoor},
-#                             'box_boundary': {'x_min': xmin, 'x_max': xmax, 'y_min': ymin, 'y_max': ymax}
-#                         }
-#                     })

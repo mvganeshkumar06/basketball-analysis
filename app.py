@@ -69,8 +69,8 @@ def upload_video():
     shooting_result['attempts'] = 0
     shooting_result['made'] = 0
     shooting_result['miss'] = 0
-    # if (os.path.exists("./static/detections/trajectory_fitting.jpg")):
-    #     os.remove("./static/detections/trajectory_fitting.jpg")
+    if (os.path.exists("./static/detections/trajectory_fitting.jpg")):
+        os.remove("./static/detections/trajectory_fitting.jpg")
     if request.method == 'POST':
         f = request.files['video']
         # create a secure filename
@@ -81,7 +81,6 @@ def upload_video():
         print("filepath", filepath)
         f.save(filepath)
         session['video_path'] = filepath
-        # stream = getVideoStream(filepath)
         return render_template("shooting_analysis.html")
 
 
