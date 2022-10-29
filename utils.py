@@ -131,7 +131,7 @@ def detect_shot(frame, trace, width, height, sess, image_tensor, boxes, scores, 
 
     # getting openpose keypoints
     datum.cvInputData = frame
-    opWrapper.emplaceAndPop([datum])
+    opWrapper.emplaceAndPop(op.VectorDatum([datum]))
     try:
         headX, headY, headConf = datum.poseKeypoints[0][0]
         handX, handY, handConf = datum.poseKeypoints[0][4]

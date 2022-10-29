@@ -3,8 +3,10 @@ from flask import Flask, render_template, Response,  request, session
 from werkzeug.utils import secure_filename
 from config import shooting_result
 from app_helper import getVideoStream, get_image
+from flask_ngrok import run_with_ngrok
 
 app = Flask(__name__)
+run_with_ngrok(app)
 UPLOAD_FOLDER = './static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # useless key, in order to use session
@@ -14,26 +16,6 @@ app.secret_key = "super secret key"
 @app.route("/")
 def index():
     return render_template("index.html")
-
-
-# @app.route('/detection_json', methods=['GET', 'POST'])
-# def detection_json():
-#     if request.method == 'POST':
-#         response = []
-#         f = request.files['image']
-#         # create a secure filename
-#         filename = secure_filename(f.filename)
-#         print("filename", filename)
-#         # save file to /static/uploads
-#         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-#         print("filepath", filepath)
-#         f.save(filepath)
-#         detectionAPI(response, filepath)
-#         print(response)
-#         try:
-#             return jsonify(response), 200
-#         except FileNotFoundError:
-#             abort(404)
 
 
 @app.route('/sample_detection', methods=['GET', 'POST'])
@@ -113,8 +95,6 @@ def video_feed():
 
 @app.route("/result", methods=['GET', 'POST'])
 def result():
-    # get video stream
-    # pass the stream to detection api and get the result
     return render_template("result.html", shooting_result=shooting_result)
 
 # disable caching
@@ -129,4 +109,4 @@ def after_request(response):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=True)
+    app.run()
