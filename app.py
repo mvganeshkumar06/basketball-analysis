@@ -27,7 +27,7 @@ def upload_sample_image():
         filepath = "./static/uploads/sample_image.jpg"
         print("filepath", filepath)
         get_image(filepath, filename, response)
-        return render_template("shot_detection.html", display_detection=filename, fname=filename, response=response)
+        return render_template("shot_detection.html", filename=filename, response=response)
 
 
 @app.route('/basketball_detection', methods=['GET', 'POST'])
@@ -43,7 +43,7 @@ def upload_image():
         print("filepath", filepath)
         f.save(filepath)
         get_image(filepath, filename, response)
-        return render_template("shot_detection.html", display_detection=filename, fname=filename, response=response)
+        return render_template("shot_detection.html", filename=filename, response=response)
 
 
 @app.route('/sample_analysis', methods=['GET', 'POST'])

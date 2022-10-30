@@ -105,8 +105,3 @@ def get_image(image_path, img_name, response):
 
     cv2.imwrite(output_path + '{}' .format(filename), detection)
     print('output saved to: {}'.format(output_path + '{}'.format(filename)))
-
-
-# def detectionAPI(response, image_path):
-#     image = cv2.imread(image_path)
-#     detect_API(response, image)
