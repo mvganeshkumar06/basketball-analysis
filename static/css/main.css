@@ -1,7 +1,7 @@
 :root {
-    --base: #707070;
-    --primary: #CBABED;
-    --secondary: #C2F9BB;
+    --base: #2D3748;
+    --primary: #D6BCFA;
+    --secondary: #9AE6B4;
 }
 
 body {
@@ -38,50 +38,12 @@ body {
 }
 
 .title {
-    font-size: 2rem;
-    margin: 1rem 0rem;
     text-align: center;
 }
 
 .container-fluid {
     padding: 0;
     margin: 0;
-}
-
-.features-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: -2vw;
-}
-
-.feature-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding-bottom: 1vw;
-    width: 100%;
-}
-
-.feature-image {
-    border: 5px solid var(--primary);
-}
-
-.feature-title {
-    font-size: 2vw;
-}
-
-.feature-text {
-    font-size: 1.5vw;
-}
-
-.demo-feature {
-    width: 90vw;
-}
-
-.demo-small-feature {
-    width: 44vw;
 }
 
 .comparison {
@@ -128,15 +90,13 @@ body {
 
 .stat-name {
     font-size: 1.75rem;
-    font-weight: bold;
-    color: var(--base);
+    margin-bottom: 0.5rem;
 }
 
 .stat-num {
     font-size: 1.5rem;
-    font-weight: bold;
     text-align: center;
-    color: var(--base);
+    margin-bottom: 0.5rem;
 }
 
 .image-stat {
@@ -194,12 +154,6 @@ body {
     100% {
         box-shadow: 0 0 0 1.5vw rgba(0, 0, 0, 0);
     }
-}
-
-.result-title {
-    text-align: center;
-    color: var(--base);
-    font-weight: bold;
 }
 
 .hint {
@@ -276,10 +230,25 @@ body {
 
 .upload-form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0rem
+    margin: 1rem 0rem;
+}
+
+.upload-form .btn {
+    width: 100%;
+}
+
+.sample-upload {
+    display: flex;
+    flex-direction: row;
+    margin: 2rem 0rem;
+}
+
+.upload-input {
+    font-size: 1rem;
+    margin: 1rem 0rem;
 }
 
 .legend-container {
