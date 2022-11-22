@@ -5,11 +5,20 @@ import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import os
 import sys
-sys.path.append(os.path.join(os.getcwd(), '/usr/local/python'))
-tf.disable_v2_behavior()
-
 from config import shooting_result
-from openpose import pyopenpose as op
+
+tf.disable_v2_behavior()
+dir_path = os.path.dirname(os.path.realpath(_file_))
+
+try:
+    # Change these variables to point to the correct folder (Release/x64 etc.)
+    sys.path.append(dir_path + '/openpose/bin/python/openpose/Release')
+    os.environ['PATH'] = os.environ['PATH'] + ';' + \
+        dir_path + '/../x64/Release;' + dir_path + '/openpose/bin;'
+    import pyopenpose as op
+except ImportError as e:
+    print('Error: OpenPose library could not be found.')
+    raise e
 
 
 def tensorflow_init():
